@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoxia.Shell", "src\Leoxia.Shell\Leoxia.Shell.csproj", "{5E9EBED4-5165-43FD-A777-1F3AEA852FE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoxia.ReadLine", "src\Leoxia.ReadLine\Leoxia.ReadLine.csproj", "{154032BB-54D9-4A0B-8243-0E5F74394E0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FD8D6609-47F2-49D0-9201-BB7F8111FD84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoxia.ReadLine.Test", "test\Leoxia.ReadLine.Test\Leoxia.ReadLine.Test.csproj", "{4392BFAC-77EC-404D-A00C-38E9700F3AC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoxia.Commands", "src\Leoxia.Commands\Leoxia.Commands.csproj", "{C80AEAF5-7E54-4100-AC7C-59CEA1EF5CE8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E9EBED4-5165-43FD-A777-1F3AEA852FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E9EBED4-5165-43FD-A777-1F3AEA852FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E9EBED4-5165-43FD-A777-1F3AEA852FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E9EBED4-5165-43FD-A777-1F3AEA852FE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{154032BB-54D9-4A0B-8243-0E5F74394E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{154032BB-54D9-4A0B-8243-0E5F74394E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{154032BB-54D9-4A0B-8243-0E5F74394E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{154032BB-54D9-4A0B-8243-0E5F74394E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4392BFAC-77EC-404D-A00C-38E9700F3AC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4392BFAC-77EC-404D-A00C-38E9700F3AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4392BFAC-77EC-404D-A00C-38E9700F3AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4392BFAC-77EC-404D-A00C-38E9700F3AC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C80AEAF5-7E54-4100-AC7C-59CEA1EF5CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C80AEAF5-7E54-4100-AC7C-59CEA1EF5CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C80AEAF5-7E54-4100-AC7C-59CEA1EF5CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C80AEAF5-7E54-4100-AC7C-59CEA1EF5CE8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4392BFAC-77EC-404D-A00C-38E9700F3AC1} = {FD8D6609-47F2-49D0-9201-BB7F8111FD84}
+	EndGlobalSection
+EndGlobal
