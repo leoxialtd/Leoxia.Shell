@@ -18,6 +18,7 @@ namespace Leoxia.ReadLine
         {
             _buffers = _history.Select(h => new CommandLineBuffer(h)).ToList();
             _buffers.Add(new CommandLineBuffer());
+            _currentIndex = _buffers.Count - 1;
         }
 
         public string Validate()
