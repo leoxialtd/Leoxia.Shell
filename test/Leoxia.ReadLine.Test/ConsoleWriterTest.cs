@@ -121,5 +121,33 @@ namespace Leoxia.ReadLine.Test
             Assert.Equal("ab_cd", buffer.ToString());
             Assert.Equal("ab_cd", GetBuffer());
         }
+
+
+        [Fact]
+        public void WriteMoveBackspaceMixed()
+        {
+            var console = BuildConsole();
+            var writer = new ConsoleWriter(console);
+            var buffer = new CommandLineBuffer();
+            writer.Write(buffer, 'f');
+            writer.Write(buffer, 'b');
+            writer.Write(buffer, 'a');
+            writer.Write(buffer, 'r');
+            writer.MoveCursorLeft();
+            writer.MoveCursorLeft();
+            writer.MoveCursorLeft();
+            writer.Write(buffer, 'o');
+            writer.Write(buffer, 'o');
+            writer.MoveCursorRight();
+            writer.MoveCursorRight();
+            writer.Backspace(buffer);
+            writer.Backspace(buffer);
+            writer.Write(buffer, 'B');
+            writer.Write(buffer, '@');
+            writer.MoveCursorLeft();
+            writer.Write(buffer, 'A');
+            Assert.Equal("fooBA@r", buffer.ToString());
+            Assert.Equal("fooBA@r", GetBuffer());
+        }
     }
 }

@@ -4,9 +4,9 @@ namespace Leoxia.ReadLine
 {
     public interface IHistoryNavigator
     {
-        CommandLineBuffer GetNext();
-        CommandLineBuffer GetPrevious();
-        bool HasHistory { get; }
+        void GoNext();
+        void GoPrevious();
+        bool HasPrevious { get; }
         bool HasNext { get; }
         CommandLineBuffer Current { get; }
         string Validate();

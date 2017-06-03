@@ -73,17 +73,17 @@ namespace Leoxia.ReadLine
         {
             if (_historyNavigator.HasNext)
             {
-                var history = _historyNavigator.GetNext();
-                _writer.Write(history);
+                _historyNavigator.GoNext();
+                _writer.Write(_historyNavigator.Current);
             }
         }
 
         private void PreviousHistory()
         {
-            if (_historyNavigator.HasHistory)
+            if (_historyNavigator.HasPrevious)
             {
-                var history = _historyNavigator.GetPrevious();
-                _writer.Write(history);
+                _historyNavigator.GoPrevious();
+                _writer.Write(_historyNavigator.Current);
             }
         }
 
@@ -129,8 +129,6 @@ namespace Leoxia.ReadLine
                 _handlers.Add(sequence, action);
             }
         }
-
-
 
         private void ResetAutoComplete()
         {

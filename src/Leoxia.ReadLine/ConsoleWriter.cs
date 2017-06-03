@@ -43,12 +43,12 @@ namespace Leoxia.ReadLine
         public void Write(CommandLineBuffer history)
         {
             var spaces = _cursorLimit - history.Length;
-            if (spaces > 0)
-            {
-                _console.Write(String.Concat(Enumerable.Repeat(' ', spaces)));
-            }
             _console.SetCursorPosition(_initialLeft, _initialTop);
             _console.Write(history);
+            if (spaces > 0)
+            {
+                WriteInPlace(String.Concat(Enumerable.Repeat(' ', spaces)));
+            }
             _cursorPos = _cursorLimit = history.Length;
         }
 
@@ -62,17 +62,22 @@ namespace Leoxia.ReadLine
             }
             else
             {
-                var left = _console.CursorLeft;
-                var top = _console.CursorTop;
                 var str = buffer.ToString().Substring(_cursorPos);
                 buffer.Insert(_cursorPos, c);
-                _console.Write(c + str);
-                _console.SetCursorPosition(left, top);
+                WriteInPlace(c + str);
                 MoveCursorRight();
             }
             _maxLeft = _console.CursorLeft;
             _maxTop = _console.CursorTop;
             _cursorLimit++;
+        }
+
+        private void WriteInPlace(string value)
+        {
+            var left = _console.CursorLeft;
+            var top = _console.CursorTop;
+            _console.Write(value);
+            _console.SetCursorPosition(left, top);
         }
 
         public void Backspace(CommandLineBuffer buffer)
@@ -82,15 +87,13 @@ namespace Leoxia.ReadLine
                 buffer.Remove(_cursorPos - 1, 1);
                 var isEndOfLine = IsEndOfLine();
                 MoveCursorLeft();
-                int left = _console.CursorLeft;
-                int top = _console.CursorTop;
+                var value = " ";
                 if (!isEndOfLine)
                 {
-                    var str = buffer.ToString().Substring(_cursorPos - 1);
-                    _console.Write(str);
+                    var str = buffer.ToString().Substring(_cursorPos);
+                    value = str + value;
                 }
-                _console.Write(' ');
-                _console.SetCursorPosition(left, top);
+                WriteInPlace(value);
                 _cursorLimit--;
             }
         }
