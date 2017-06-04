@@ -70,12 +70,12 @@ namespace Leoxia.Commands
 
 
         public ConsoleColor GetColor(out string qualifier, ConsoleColor defaultColor, 
-            IFileSystemInfoFactory factory)
+            IFileSystemInfoFactory factory, ILinkManager manager)
         {
             qualifier = string.Empty;
             ConsoleColor entryColor = defaultColor;
             string target;
-            if (LinkTools.IsLink(Info, out target))
+            if (manager.TryGetLink(Info, out target))
             {
                 var targetInfo = factory.Build(target);
                 if (targetInfo.Exists)

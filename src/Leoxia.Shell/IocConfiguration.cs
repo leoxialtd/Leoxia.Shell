@@ -2,9 +2,12 @@
 using Leoxia.Abstractions;
 using Leoxia.Abstractions.IO;
 using Leoxia.Commands;
+using Leoxia.Commands.External;
+using Leoxia.Commands.Threading;
 using Leoxia.Implementations;
 using Leoxia.Implementations.IO;
 using Leoxia.ReadLine;
+using ExecutableResolver = Leoxia.Commands.ExecutableResolver;
 
 namespace Leoxia.Shell
 {
@@ -13,6 +16,14 @@ namespace Leoxia.Shell
         public void Configure(Container container)
         {
             container.Register<IConsole, ConsoleAdapter>(Reuse.Singleton);
+            container.RegisterInstance<ISafeConsole>(SafeConsoleAdapter.Instance, Reuse.Singleton);
+            container.Register<IExecutableResolver, ExecutableResolver>(Reuse.Singleton);
+            container.Register<IProgramRunner, ProgramRunner>(Reuse.Singleton);
+            container.Register<IEnvironmentVariablesExpander, EnvironmentVariablesExpander>(Reuse.Singleton);
+            container.Register<ILinkManager, LinkManager>(Reuse.Singleton);
+            container.Register<IWin32LinkResolver, Win32LinkResolver>(Reuse.Singleton);
+            container.Register<IUnixLinkResolver, UnixLinkResolver>(Reuse.Singleton);
+            container.Register<IFileInfoFactory, FileInfoFactory>(Reuse.Singleton);
             container.Register<IKeyHandler, KeyHandler>(Reuse.Singleton);
             container.Register<IConsoleInputHandler, ConsoleInputHandler>(Reuse.Singleton);
             container.Register<ICommandExecutor, CommandExecutor>(Reuse.Singleton);

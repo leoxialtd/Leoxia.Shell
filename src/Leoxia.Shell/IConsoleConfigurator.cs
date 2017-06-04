@@ -21,6 +21,9 @@ namespace Leoxia.Shell
         {
             _console.OutputEncoding = Encoding.Unicode;
             _console.TreatControlCAsInput = true;
+            _console.OutputEncoding = Encoding.Unicode;
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
         }
     }
 }

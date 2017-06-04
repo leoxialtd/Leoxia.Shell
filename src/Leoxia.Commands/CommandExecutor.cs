@@ -2,25 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using Leoxia.Abstractions.IO;
-using Leoxia.Scripting.Commands;
-using Leoxia.Text.Extensions;
+using Leoxia.Commands.External;
+using Leoxia.Commands.Infrastructure;
 
 namespace Leoxia.Commands
 {
     public class CommandExecutor : ICommandExecutor
     {
         private readonly IConsole _console;
+        private readonly IExecutableResolver _resolver;
+        private readonly IProgramRunner _runner;
 
         private readonly IDictionary<string, IBuiltin> _builtins = 
             new Dictionary<string, IBuiltin>();
 
-        public CommandExecutor(IConsole console, IDirectory directory, IFileSystemInfoFactory fileSystemFactory)
+        public CommandExecutor(
+            IConsole console, 
+            IDirectory directory, 
+            IFileSystemInfoFactory fileSystemFactory,
+            IExecutableResolver resolver,
+            IProgramRunner runner,
+            IEnvironmentVariablesExpander expander,
+            ILinkManager linkManager)
         {
             _console = console;
-            _builtins.Add("echo", new Echo(console));
+            _resolver = resolver;
+            _runner = runner;
+            _builtins.Add("echo", new Echo(console, expander));
             _builtins.Add("cd", new Cd(console, directory));
             _builtins.Add("mkdir", new Mkdir(console, directory));
-            _builtins.Add("ls", new Ls(console, directory, fileSystemFactory));
+            _builtins.Add("ls", new Ls(console, directory, fileSystemFactory, linkManager));
             //            _builtins.Add("rm", new Rm());
             //            _builtins.Add("del", new Del());
         }
@@ -49,13 +60,13 @@ namespace Leoxia.Commands
                 }
                 else
                 {
-                    if (string.IsNullOrEmpty(ExecutableResolver.Resolve(first, false)))
+                    if (string.IsNullOrEmpty(_resolver.Resolve(first)))
                     {
                         _console.Error.WriteLine($"lxsh: {first}: command not found");
                     }
                     else
                     {
-                        Builtins.Run(command);
+                        _runner.Run(command);
                     }
                 }
             }

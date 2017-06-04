@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FD8D6609-4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoxia.ReadLine.Test", "test\Leoxia.ReadLine.Test\Leoxia.ReadLine.Test.csproj", "{4392BFAC-77EC-404D-A00C-38E9700F3AC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoxia.Commands", "src\Leoxia.Commands\Leoxia.Commands.csproj", "{C80AEAF5-7E54-4100-AC7C-59CEA1EF5CE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoxia.Commands.Test", "test\Leoxia.Commands.Test\Leoxia.Commands.Test.csproj", "{06524968-8894-42C9-80F7-E1F98144B305}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Commands", "src\Leoxia.Commands\Leoxia.Commands.csproj", "{14A6DF4C-0835-4352-BB35-63E225D7A6A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,15 +33,20 @@ Global
 		{4392BFAC-77EC-404D-A00C-38E9700F3AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4392BFAC-77EC-404D-A00C-38E9700F3AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4392BFAC-77EC-404D-A00C-38E9700F3AC1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C80AEAF5-7E54-4100-AC7C-59CEA1EF5CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C80AEAF5-7E54-4100-AC7C-59CEA1EF5CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C80AEAF5-7E54-4100-AC7C-59CEA1EF5CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C80AEAF5-7E54-4100-AC7C-59CEA1EF5CE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06524968-8894-42C9-80F7-E1F98144B305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06524968-8894-42C9-80F7-E1F98144B305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06524968-8894-42C9-80F7-E1F98144B305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06524968-8894-42C9-80F7-E1F98144B305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A6DF4C-0835-4352-BB35-63E225D7A6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A6DF4C-0835-4352-BB35-63E225D7A6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A6DF4C-0835-4352-BB35-63E225D7A6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A6DF4C-0835-4352-BB35-63E225D7A6A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4392BFAC-77EC-404D-A00C-38E9700F3AC1} = {FD8D6609-47F2-49D0-9201-BB7F8111FD84}
+		{06524968-8894-42C9-80F7-E1F98144B305} = {FD8D6609-47F2-49D0-9201-BB7F8111FD84}
 	EndGlobalSection
 EndGlobal

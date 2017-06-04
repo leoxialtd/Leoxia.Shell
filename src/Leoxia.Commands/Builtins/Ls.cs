@@ -13,13 +13,17 @@ namespace Leoxia.Commands
         private readonly IConsole _console;
         private readonly IDirectory _directory;
         private readonly IFileSystemInfoFactory _factory;
+        private readonly ILinkManager _linkManager;
 
         public Ls(IConsole console, 
-            IDirectory directory, IFileSystemInfoFactory factory)
+            IDirectory directory, 
+            IFileSystemInfoFactory factory,
+            ILinkManager linkManager)
         {
             _console = console;
             _directory = directory;
             _factory = factory;
+            _linkManager = linkManager;
         }
 
         public void Execute(List<string> tokens)
@@ -134,7 +138,7 @@ namespace Leoxia.Commands
                 ConsoleColor entryColor = _console.ForegroundColor;
                 if (showColors)
                 {
-                    entryColor = entry.GetColor(out qualifier, _console.ForegroundColor, _factory);
+                    entryColor = entry.GetColor(out qualifier, _console.ForegroundColor, _factory, _linkManager);
                 }
                 if (showHidden || !entry.Info.IsHidden())
                 {

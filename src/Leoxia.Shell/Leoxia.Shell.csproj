@@ -9,6 +9,7 @@
     <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="1.1.1" />
     <PackageReference Include="Leoxia.Implementations.IO" Version="1.1.90" />
     <PackageReference Include="Leoxia.Implementations.Time" Version="1.1.90" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Leoxia.Commands\Leoxia.Commands.csproj" />
