@@ -20,6 +20,7 @@ namespace Leoxia.Shell
             container.Register<IExecutableResolver, ExecutableResolver>(Reuse.Singleton);
             container.Register<IProgramRunner, ProgramRunner>(Reuse.Singleton);
             container.Register<IEnvironmentVariablesExpander, EnvironmentVariablesExpander>(Reuse.Singleton);
+            container.Register<IEnvironmentVariablesProvider, EnvironmentVariablesProvider>(Reuse.Singleton);
             container.Register<ILinkManager, LinkManager>(Reuse.Singleton);
             container.Register<IWin32LinkResolver, Win32LinkResolver>(Reuse.Singleton);
             container.Register<IUnixLinkResolver, UnixLinkResolver>(Reuse.Singleton);

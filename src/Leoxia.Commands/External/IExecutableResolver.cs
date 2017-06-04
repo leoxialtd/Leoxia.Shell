@@ -82,7 +82,6 @@ namespace Leoxia.Commands
 
         private static string[] SplitPath()
         {
-
             char splitCharacter;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {

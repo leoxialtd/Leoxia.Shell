@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Leoxia.Commands
@@ -15,7 +17,16 @@ namespace Leoxia.Commands
 
         public EnvironmentVariablesExpander(IEnvironmentVariablesProvider provider)
         {
-            _variables = provider.GetVariables().ToDictionary(x => x.Key, y => y.Value);
+            _variables = provider.GetVariables().ToDictionary(x => x.Key, y => y.Value, GetEqualityComparer());
+        }
+
+        private IEqualityComparer<string> GetEqualityComparer()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return StringComparer.OrdinalIgnoreCase;
+            }
+            return StringComparer.Ordinal;
         }
 
         public string Expand(string str)
