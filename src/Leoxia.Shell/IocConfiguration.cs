@@ -21,6 +21,8 @@ namespace Leoxia.Shell
             container.Register<IDirectory, DirectoryAdapter>(Reuse.Singleton);
             container.Register<IPromptProvider, PromptProvider>(Reuse.Singleton);
             container.Register<IConsoleWriter, ConsoleWriter>(Reuse.Singleton);
+            container.Register<IConsoleConfigurator, ConsoleConfigurator>(Reuse.Singleton);
+            container.Register<IFileSystemInfoFactory, FileSystemInfoFactory>(Reuse.Singleton, made: Made.Of(() => new FileSystemInfoFactory()));
         }
     }
 }

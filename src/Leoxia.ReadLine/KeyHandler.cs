@@ -55,6 +55,10 @@ namespace Leoxia.ReadLine
             AddHandler(PreviousHistory, Seqs.ControlP, Seqs.UpArrow);
             AddHandler(NextHistory, Seqs.ControlN, Seqs.DownArrow);
 
+            AddHandler(BreakProcess, Seqs.ControlC);
+
+            AddHandler(StartCompletion, Seqs.Tab);
+
             // Cmder specific features
             //AddHandler(TraverseUpDirectory, Seqs.ControlAltU);
 
@@ -67,6 +71,16 @@ namespace Leoxia.ReadLine
             // Undo
             //AddHandler(Undo, Seqs.ControlUnderscore, Seqs.ControlXControlU);
             //_handlers.Add(BuildKey(ConsoleKey.Underscore, Console.Control), Undo);
+        }
+
+        private void StartCompletion()
+        {
+            
+        }
+
+        private void BreakProcess()
+        {
+            
         }
 
         private void NextHistory()
@@ -102,11 +116,7 @@ namespace Leoxia.ReadLine
             }
             else
             {   
-                if (!keyInfo.Modifiers.HasFlag(ConsoleModifiers.Alt) && 
-                    !keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control))
-                {
-                    _writer.Write(_historyNavigator.Current, keyInfo.KeyChar);
-                }
+                _writer.Write(_historyNavigator.Current, keyInfo.KeyChar);               
             }
         }
 
@@ -132,6 +142,7 @@ namespace Leoxia.ReadLine
 
         private void ResetAutoComplete()
         {
+
         }
 
         private bool IsInAutoCompleteMode()

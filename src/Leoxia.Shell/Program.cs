@@ -24,10 +24,12 @@ namespace Leoxia.Shell
                 configuration.Configure(container);
                 var inputHandler = container.Resolve<IConsoleInputHandler>();
                 var commandExecutor = container.Resolve<ICommandExecutor>();
+                var consoleConfigurator = container.Resolve<IConsoleConfigurator>();
+                consoleConfigurator.Configure();
                 while (running)
                 {
                     var rawLine = inputHandler.ReadLine();
-                    var result = commandExecutor.Executor(rawLine);
+                    var result = commandExecutor.Execute(rawLine);
                     running = !result.IsExit;
                 }
             }
@@ -43,6 +45,4 @@ namespace Leoxia.Shell
             return 0;
         }
     }
-
-
 }
