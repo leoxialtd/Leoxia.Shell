@@ -22,7 +22,7 @@ Not tested on Linux but should work as well.
 
 - Standard output/error is captured from child process and displayed in console.
 
-## Environement Variables Expansion
+## Environment Variables Expansion
 
 Expand `${VARIABLE}` `$VARIABLE` `%VARIABLE%`
 
