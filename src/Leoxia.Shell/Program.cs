@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net.Sockets;
+using System.Reflection;
 using DryIoc;
 using Leoxia.Abstractions.IO;
 using Leoxia.Commands;
@@ -26,6 +27,7 @@ namespace Leoxia.Shell
                 var commandExecutor = container.Resolve<ICommandExecutor>();
                 var consoleConfigurator = container.Resolve<IConsoleConfigurator>();
                 consoleConfigurator.Configure();
+                WriteCopyrightNotice(container);
                 while (running)
                 {
                     var rawLine = inputHandler.ReadLine();
@@ -43,6 +45,14 @@ namespace Leoxia.Shell
                 }
             }
             return 0;
+        }
+
+        private static void WriteCopyrightNotice(Container container)
+        {
+            var console = container.Resolve<IConsole>();
+            console.WriteLine("Leoxia [version " + Assembly.GetExecutingAssembly().GetName().Version + "]");
+            console.WriteLine("(c) " + DateTime.Today.Year + " Leoxia Ltd. All rights reserved.");
+            console.WriteLine();
         }
     }
 }

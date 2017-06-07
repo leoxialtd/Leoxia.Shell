@@ -29,8 +29,15 @@ namespace Leoxia.Commands
         {
             if (systemInfo.Attributes.HasFlag(FileAttributes.Directory))
             {
-                var directoryInfo = systemInfo as IDirectoryInfo;
-                return directoryInfo.GetFileSystemInfos().Length;
+                try
+                {
+                    var directoryInfo = systemInfo as IDirectoryInfo;
+                    return directoryInfo.GetFileSystemInfos().Length;
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    return -1;
+                }
             }
             return 1;
         }
@@ -51,14 +58,28 @@ namespace Leoxia.Commands
 
         public static string GetOwner(this IFileSystemInfo systemInfo)
         {
-            FileSecurity security = GetFileSecurity(systemInfo);
-            return security.GetOwner(typeof(NTAccount)).Value;
+            try
+            {
+                FileSecurity security = GetFileSecurity(systemInfo);
+                return security.GetOwner(typeof(NTAccount)).Value;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return "Unknown";
+            }
         }
 
         public static string GetGroup(this IFileSystemInfo systemInfo)
         {
-            FileSecurity security = GetFileSecurity(systemInfo);
-            return security.GetGroup(typeof(NTAccount)).Value;
+            try
+            {
+                FileSecurity security = GetFileSecurity(systemInfo);
+                return security.GetGroup(typeof(NTAccount)).Value;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return "Unknown";
+            }
         }
 
         public static string GetRightsListing(this IFileSystemInfo systemInfo)
