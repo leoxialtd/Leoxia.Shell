@@ -11,7 +11,8 @@ namespace Leoxia.Commands.Threading
 
     /// <summary>
     /// Console Adapter that ensure that every parrallel call is forwarded 
-    /// to one thread.
+    /// to one thread. Ensure synchronization of block of codes, like changing back and forth
+    /// the color of the foreground.
     /// </summary>
     /// <seealso cref="IConsole" />
     public class SafeConsoleAdapter : ISafeConsole

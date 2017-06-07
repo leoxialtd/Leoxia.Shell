@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using Microsoft.Win32.SafeHandles;
 
 namespace Leoxia.Commands.Win32
 {
@@ -56,6 +57,25 @@ namespace Leoxia.Commands.Win32
             {
                 CloseHandle(h);
             }
+        }
+
+
+        const Int32 WM_KEYDOWN = 0x0100;
+        const Int32 WM_KEYUP = 0x0101;
+        const Int32 WM_CHAR = 0x0102;
+        const Int32 VK_RETURN = 0x0D;
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern bool PostMessage(IntPtr hWnd, [MarshalAs(UnmanagedType.U4)] uint Msg, int wParam, int lParam);
+
+        public static void WriteToConsole(IntPtr hWnd, ConsoleKeyInfo key)
+        {
+            PostMessage(hWnd, WM_CHAR, key.KeyChar, 0);
         }
     }
 }

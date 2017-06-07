@@ -10,19 +10,20 @@ namespace Leoxia.Commands
     public class UnixLinkResolver : IUnixLinkResolver
     {
         private readonly IExecutableResolver _resolver;
-        private readonly IProgramRunner _runner;
+        private readonly IProgramRunnerFactory _runnerFactory;
 
-        public UnixLinkResolver(IExecutableResolver resolver, IProgramRunner runner)
+        public UnixLinkResolver(IExecutableResolver resolver, IProgramRunnerFactory runnerFactory)
         {
             _resolver = resolver;
-            _runner = runner;
+            _runnerFactory = runnerFactory;
         }
 
         public string Resolve(string path)
         {
             if (!string.IsNullOrEmpty(_resolver.Resolve("readlink")))
             {
-                return _runner.Run("readlink " + path);
+                var runner = _runnerFactory.CreateRunner("readlink " + path);
+                return runner.AsyncRun().Result;
             }
             return null;
         }

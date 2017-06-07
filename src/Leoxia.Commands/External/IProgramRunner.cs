@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Leoxia.Abstractions.IO;
 using Leoxia.Commands.Infrastructure;
 using Leoxia.Commands.Threading;
 
@@ -11,35 +13,93 @@ namespace Leoxia.Commands.External
 {
     public interface IProgramRunner
     {
-        ProgramResult Run(string command);
+        Task<ProgramResult> AsyncRun();
+        void WriteInInput(ConsoleKeyInfo key);
     }
 
-    public class ProgramRunner : IProgramRunner
+    public sealed class ProgramRunner : IProgramRunner, IDisposable
     {
         private readonly IEnvironmentVariablesExpander _expander;
         private readonly IExecutableResolver _resolver;
         private readonly ISafeConsole _safeConsole;
+        private readonly IDirectory _directory;
+        private readonly string _commandLine;
+        private ProcessStartInfo _startInfo;
+        private readonly string _processName;
+        private readonly Process _process;
+        private StreamReaderBridge _outputBridge;
+        private StreamReaderBridge _errorBridge;
+        private StreamWriterBridge _inputBridge;
+        private readonly string _arguments;
+        private StreamWriter _input;
+        private FlushingBuffer _flushingOutput;
 
-        public ProgramRunner(IEnvironmentVariablesExpander expander,
+        public ProgramRunner(IEnvironmentVariablesExpander expander, 
             IExecutableResolver resolver, 
-            ISafeConsole safeConsole)
+            ISafeConsole safeConsole, 
+            IDirectory directory,
+            string commandLine)
         {
             _expander = expander;
             _resolver = resolver;
             _safeConsole = safeConsole;
+            _directory = directory;
+            _commandLine = commandLine;
+            // Ensure proper display of some characters
+            _commandLine = _expander.Expand(_commandLine);
+            var argumentList = GetArgumentList(_commandLine);
+            _processName = argumentList[0];
+            _startInfo = new ProcessStartInfo(_resolver.Resolve(_processName));
+            argumentList.RemoveAt(0);
+            _arguments = string.Empty;
+            if (argumentList.Any())
+            {
+                _arguments = AggregateArguments(argumentList);
+                _startInfo.Arguments = _arguments;
+            }
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                // Not Supported on Unix
+                _startInfo.LoadUserProfile = true;                
+            }
+            _startInfo.CreateNoWindow = false;
+            _startInfo.UseShellExecute = false;
+            _startInfo.RedirectStandardOutput = true;
+            _startInfo.RedirectStandardError = true;
+            // TODO: Fix StandardInput Redirecton
+            //_startInfo.RedirectStandardInput = true;        
+            _startInfo.WorkingDirectory = _directory.GetCurrentDirectory();
+            _process = new Process();            
+            _process.StartInfo = _startInfo;
         }
 
-        public ProgramResult Run(string commandLine)
+        public async Task<ProgramResult> AsyncRun()
         {
-            try
+            if (!_process.Start())
             {
-                return AsyncRun(commandLine).Result;
+                _safeConsole.Error.WriteLine("Cannot start process " + _processName + " " + _arguments);
             }
-            catch (Exception e)
+            // TODO: Fix StandardInput Redirecton
+            //_inputBridge = new StreamWriterBridge(_process);
+            _flushingOutput = new FlushingBuffer(_safeConsole.Out);
+            _outputBridge = new StreamReaderBridge(_process.StandardOutput, _flushingOutput);
+            _errorBridge = new StreamReaderBridge(_process.StandardError, new LineBuffer(_safeConsole.Error, _safeConsole));
+            _outputBridge.BeginRead();
+            _errorBridge.BeginRead();
+            return await Task.Run(() =>
             {
-                _safeConsole.WriteLine(e.Message);
-                return new ProgramResult(string.Empty, e.Message, -2);
-            }
+                DateTime start = DateTime.Now;
+                while (!_process.HasExited)
+                {
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
+                    _process.Refresh();
+                }
+                _outputBridge.EndRead();
+                _errorBridge.EndRead();
+                var exitCode = _process.ExitCode;
+                Dispose();
+                return new ProgramResult(_outputBridge.ToString(), _errorBridge.ToString(), exitCode);
+            });
         }
 
         private static string AggregateArguments(List<string> argumentList)
@@ -52,52 +112,16 @@ namespace Leoxia.Commands.External
             return CommandLine.Split(commandLine).TrimMatchingQuotes().ToList();
         }
 
-        public async Task<ProgramResult> AsyncRun(string commandLine)
+        public void WriteInInput(ConsoleKeyInfo key)
         {
-            return await Task.Run(() =>
-            {
-                // Ensure proper display of some characters
-                commandLine = _expander.Expand(commandLine);
-                var argumentList = GetArgumentList(commandLine);
-                var processName = argumentList[0];
-                ProcessStartInfo startInfo = new ProcessStartInfo(_resolver.Resolve(processName));
-                argumentList.RemoveAt(0);
-                string arguments = string.Empty;
-                if (argumentList.Any())
-                {
-                    arguments = AggregateArguments(argumentList);
-                    startInfo.Arguments = arguments;
-                }
-                startInfo.CreateNoWindow = false;
-                startInfo.UseShellExecute = false;
-                // Not Supported on Unix
-                // startInfo.LoadUserProfile = true;
-                startInfo.RedirectStandardOutput = true;
-                startInfo.RedirectStandardError = true;
-                startInfo.RedirectStandardInput = true;
-                startInfo.WorkingDirectory = Directory.GetCurrentDirectory();
-                using (var process = new Process())
-                {
-                    process.StartInfo = startInfo;
-                    var logger = new ProcessLogger(Path.GetFileName(startInfo.FileName), _safeConsole);
-                    process.OutputDataReceived += logger.OnOutput;
-                    process.ErrorDataReceived += logger.OnError;
-                    if (!process.Start())
-                    {
-                        _safeConsole.Error.WriteLine("Cannot start process " + processName + " " + arguments);
-                    }
-                    process.BeginErrorReadLine();
-                    process.BeginOutputReadLine();
-                    DateTime start = DateTime.Now;
-                    while (!process.HasExited)
-                    {
-                        Task.Delay(TimeSpan.FromSeconds(1)).Wait();
-                    }
-                    process.OutputDataReceived -= logger.OnOutput;
-                        process.ErrorDataReceived -= logger.OnError;
-                        return new ProgramResult(logger.Output, logger.Error, process.ExitCode);                    
-                }
-            });
+            _inputBridge.Write(key);
+        }
+
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        public void Dispose()
+        {
+            _flushingOutput?.Dispose();
+            _process.Dispose();
         }
     }
 }

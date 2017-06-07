@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Leoxia.Abstractions.IO;
 using Leoxia.Commands.External;
 using Leoxia.Commands.Infrastructure;
@@ -11,7 +12,7 @@ namespace Leoxia.Commands
     {
         private readonly IConsole _console;
         private readonly IExecutableResolver _resolver;
-        private readonly IProgramRunner _runner;
+        private readonly IProgramRunnerFactory _runnerFactory;
 
         private readonly IDictionary<string, IBuiltin> _builtins = 
             new Dictionary<string, IBuiltin>();
@@ -21,13 +22,13 @@ namespace Leoxia.Commands
             IDirectory directory, 
             IFileSystemInfoFactory fileSystemFactory,
             IExecutableResolver resolver,
-            IProgramRunner runner,
+            IProgramRunnerFactory runnerFactory,
             IEnvironmentVariablesExpander expander,
             ILinkManager linkManager)
         {
             _console = console;
             _resolver = resolver;
-            _runner = runner;
+            _runnerFactory = runnerFactory;
             _builtins.Add("echo", new Echo(console, expander));
             _builtins.Add("cd", new Cd(console, directory));
             _builtins.Add("mkdir", new Mkdir(console, directory));
@@ -66,7 +67,15 @@ namespace Leoxia.Commands
                     }
                     else
                     {
-                        _runner.Run(command);
+                        var runner = _runnerFactory.CreateRunner(command);
+                        var task = runner.AsyncRun();
+                        while (!task.IsCompleted)
+                        {
+                            Task.Delay(100).Wait();
+                            // TODO: Fix the StandardInput redirection
+                            //var key = _console.ReadKey(true);
+                            //runner.WriteInInput(key);
+                        }
                     }
                 }
             }
