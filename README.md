@@ -56,4 +56,4 @@ The following builtins are already implemented
 In order to compile the projects, you'll need the following
 
 - [Visual Studio 2017 Preview 2](https://www.visualstudio.com/vs/preview/)
-- [.NET Core Preview 2](https://www.microsoft.com/net/core/preview#windowscmd)
+- [.NET Core 2.0 Preview 1](https://www.microsoft.com/net/core/preview#windowscmd)
