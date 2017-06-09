@@ -13,6 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Leoxia.Commands\Leoxia.Commands.csproj" />
+    <ProjectReference Include="..\Leoxia.CommandTransform\Leoxia.CommandTransform.csproj" />
     <ProjectReference Include="..\Leoxia.ReadLine\Leoxia.ReadLine.csproj" />
   </ItemGroup>
 </Project>

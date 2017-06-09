@@ -19,7 +19,6 @@ namespace Leoxia.Commands.External
 
     public sealed class ProgramRunner : IProgramRunner, IDisposable
     {
-        private readonly IEnvironmentVariablesExpander _expander;
         private readonly IExecutableResolver _resolver;
         private readonly ISafeConsole _safeConsole;
         private readonly IDirectory _directory;
@@ -34,19 +33,16 @@ namespace Leoxia.Commands.External
         private StreamWriter _input;
         private FlushingBuffer _flushingOutput;
 
-        public ProgramRunner(IEnvironmentVariablesExpander expander, 
+        public ProgramRunner(
             IExecutableResolver resolver, 
             ISafeConsole safeConsole, 
             IDirectory directory,
             string commandLine)
         {
-            _expander = expander;
             _resolver = resolver;
             _safeConsole = safeConsole;
             _directory = directory;
             _commandLine = commandLine;
-            // Ensure proper display of some characters
-            _commandLine = _expander.Expand(_commandLine);
             var argumentList = GetArgumentList(_commandLine);
             _processName = argumentList[0];
             _startInfo = new ProcessStartInfo(_resolver.Resolve(_processName));

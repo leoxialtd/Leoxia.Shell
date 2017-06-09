@@ -5,5 +5,6 @@ namespace Leoxia.Commands
     public interface IBuiltin
     {
         void Execute(List<string> tokens);
+        string Command { get; }
     }
 }

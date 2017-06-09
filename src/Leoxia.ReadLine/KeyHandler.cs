@@ -57,7 +57,7 @@ namespace Leoxia.ReadLine
 
             AddHandler(BreakProcess, Seqs.ControlC);
 
-            AddHandler(StartCompletion, Seqs.Tab);
+            AddHandler(AutoComplete, Seqs.Tab);
 
             // Cmder specific features
             //AddHandler(TraverseUpDirectory, Seqs.ControlAltU);
@@ -73,7 +73,7 @@ namespace Leoxia.ReadLine
             //_handlers.Add(BuildKey(ConsoleKey.Underscore, Console.Control), Undo);
         }
 
-        private void StartCompletion()
+        private void AutoComplete()
         {
             
         }
@@ -103,11 +103,6 @@ namespace Leoxia.ReadLine
 
         public void Handle(ConsoleKeyInfo keyInfo)
         {
-            // If in auto complete mode and Tab wasn't pressed
-            if (IsInAutoCompleteMode() && keyInfo.Key != ConsoleKey.Tab)
-            {
-                ResetAutoComplete();
-            }
             var key = new ControlSequence(keyInfo);
             Action handler;
             if (_handlers.TryGetValue(key, out handler))
@@ -140,14 +135,5 @@ namespace Leoxia.ReadLine
             }
         }
 
-        private void ResetAutoComplete()
-        {
-
-        }
-
-        private bool IsInAutoCompleteMode()
-        {
-            return false;
-        }
     }
 }

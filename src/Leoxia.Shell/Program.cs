@@ -5,6 +5,7 @@ using System.Reflection;
 using DryIoc;
 using Leoxia.Abstractions.IO;
 using Leoxia.Commands;
+using Leoxia.CommandTransform;
 using Leoxia.ReadLine;
 
 namespace Leoxia.Shell
@@ -28,10 +29,12 @@ namespace Leoxia.Shell
                 var consoleConfigurator = container.Resolve<IConsoleConfigurator>();
                 consoleConfigurator.Configure();
                 WriteCopyrightNotice(container);
+                var transformer = container.Resolve<ITransformPipeline>();
                 while (running)
                 {
                     var rawLine = inputHandler.ReadLine();
-                    var result = commandExecutor.Execute(rawLine);
+                    var transformed = transformer.Transform(rawLine);
+                    var result = commandExecutor.Execute(transformed);
                     running = !result.IsExit;
                 }
             }

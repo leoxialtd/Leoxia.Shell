@@ -100,6 +100,8 @@ namespace Leoxia.Commands
             }
         }
 
+        public string Command => "ls";
+
         private bool IsShortOption(string option)
         {
             return option.Length > 1 && option[1] != '-';

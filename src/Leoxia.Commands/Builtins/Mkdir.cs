@@ -29,5 +29,7 @@ namespace Leoxia.Commands
                 _console.Error.WriteLine(e.Message);
             }
         }
+
+        public string Command => "mkdir";
     }
 }

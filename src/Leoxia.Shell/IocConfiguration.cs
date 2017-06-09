@@ -4,6 +4,9 @@ using Leoxia.Abstractions.IO;
 using Leoxia.Commands;
 using Leoxia.Commands.External;
 using Leoxia.Commands.Threading;
+using Leoxia.CommandTransform;
+using Leoxia.CommandTransform.Variables;
+using Leoxia.CommandTransform.Aliases;
 using Leoxia.Implementations;
 using Leoxia.Implementations.IO;
 using Leoxia.ReadLine;
@@ -16,11 +19,20 @@ namespace Leoxia.Shell
         public void Configure(Container container)
         {
             container.Register<IConsole, ConsoleAdapter>(Reuse.Singleton);
+            container.Register<IFile, FileAdapter>(Reuse.Singleton);
             container.RegisterInstance<ISafeConsole>(SafeConsoleAdapter.Instance, Reuse.Singleton);
+            container.Register<IBuiltin, Ls>(Reuse.Singleton);
+            container.Register<IBuiltin, Cd>(Reuse.Singleton);
+            container.Register<IBuiltin, Mkdir>(Reuse.Singleton);
+            container.Register<IBuiltin, Echo>(Reuse.Singleton);
             container.Register<IExecutableResolver, ExecutableResolver>(Reuse.Singleton);
             container.Register<IProgramRunnerFactory, ProgramRunnerFactory>(Reuse.Singleton);
             container.Register<IEnvironmentVariablesExpander, EnvironmentVariablesExpander>(Reuse.Singleton);
             container.Register<IEnvironmentVariablesProvider, EnvironmentVariablesProvider>(Reuse.Singleton);
+            container.Register<ICommandTransformPipe,VariableExpanderPipe>();
+            container.Register<IAliasProvider, AliasProvider>();
+            container.Register<ICommandTransformPipe, AliasExpanderPipe>();
+            container.Register<ITransformPipeline, CommandTransformPipeline>();
             container.Register<ILinkManager, LinkManager>(Reuse.Singleton);
             container.Register<IWin32LinkResolver, Win32LinkResolver>(Reuse.Singleton);
             container.Register<IUnixLinkResolver, UnixLinkResolver>(Reuse.Singleton);
@@ -36,5 +48,10 @@ namespace Leoxia.Shell
             container.Register<IConsoleConfigurator, ConsoleConfigurator>(Reuse.Singleton);
             container.Register<IFileSystemInfoFactory, FileSystemInfoFactory>(Reuse.Singleton, made: Made.Of(() => new FileSystemInfoFactory()));
         }
+    }
+
+    public enum PipelineType
+    {
+        Main
     }
 }

@@ -17,17 +17,14 @@ namespace Leoxia.Commands.External
 
     public class ProgramRunnerFactory : IProgramRunnerFactory
     {
-        private readonly IEnvironmentVariablesExpander _expander;
         private readonly IExecutableResolver _resolver;
         private readonly ISafeConsole _safeConsole;
         private readonly IDirectory _directory;
 
-        public ProgramRunnerFactory(IEnvironmentVariablesExpander expander,
-            IExecutableResolver resolver, 
+        public ProgramRunnerFactory(IExecutableResolver resolver, 
             ISafeConsole safeConsole, 
             IDirectory directory)
         {
-            _expander = expander;
             _resolver = resolver;
             _safeConsole = safeConsole;
             _directory = directory;
@@ -36,7 +33,7 @@ namespace Leoxia.Commands.External
 
         public IProgramRunner CreateRunner(string command)
         {
-            return new ProgramRunner(_expander, _resolver, _safeConsole, _directory, command);
+            return new ProgramRunner(_resolver, _safeConsole, _directory, command);
         }
     }
 }

@@ -1,19 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26510.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoxia.Shell", "src\Leoxia.Shell\Leoxia.Shell.csproj", "{5E9EBED4-5165-43FD-A777-1F3AEA852FE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Shell", "src\Leoxia.Shell\Leoxia.Shell.csproj", "{5E9EBED4-5165-43FD-A777-1F3AEA852FE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoxia.ReadLine", "src\Leoxia.ReadLine\Leoxia.ReadLine.csproj", "{154032BB-54D9-4A0B-8243-0E5F74394E0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.ReadLine", "src\Leoxia.ReadLine\Leoxia.ReadLine.csproj", "{154032BB-54D9-4A0B-8243-0E5F74394E0F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FD8D6609-47F2-49D0-9201-BB7F8111FD84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoxia.ReadLine.Test", "test\Leoxia.ReadLine.Test\Leoxia.ReadLine.Test.csproj", "{4392BFAC-77EC-404D-A00C-38E9700F3AC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.ReadLine.Test", "test\Leoxia.ReadLine.Test\Leoxia.ReadLine.Test.csproj", "{4392BFAC-77EC-404D-A00C-38E9700F3AC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoxia.Commands.Test", "test\Leoxia.Commands.Test\Leoxia.Commands.Test.csproj", "{06524968-8894-42C9-80F7-E1F98144B305}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Commands.Test", "test\Leoxia.Commands.Test\Leoxia.Commands.Test.csproj", "{06524968-8894-42C9-80F7-E1F98144B305}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Commands", "src\Leoxia.Commands\Leoxia.Commands.csproj", "{14A6DF4C-0835-4352-BB35-63E225D7A6A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.CommandTransform", "src\Leoxia.CommandTransform\Leoxia.CommandTransform.csproj", "{B3ECCC58-9801-40D2-95E5-3E600AF105CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.CommandTransform.Test", "test\Leoxia.CommandTransform.Test\Leoxia.CommandTransform.Test.csproj", "{57D35186-CFBB-4A1B-BD0C-6963D4261F4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Commands.Infrastructure", "src\Leoxia.Commands.Infrastructure\Leoxia.Commands.Infrastructure.csproj", "{402FE059-CECB-4882-9637-B0D7101D7C28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +47,18 @@ Global
 		{14A6DF4C-0835-4352-BB35-63E225D7A6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14A6DF4C-0835-4352-BB35-63E225D7A6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14A6DF4C-0835-4352-BB35-63E225D7A6A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3ECCC58-9801-40D2-95E5-3E600AF105CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3ECCC58-9801-40D2-95E5-3E600AF105CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3ECCC58-9801-40D2-95E5-3E600AF105CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3ECCC58-9801-40D2-95E5-3E600AF105CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D35186-CFBB-4A1B-BD0C-6963D4261F4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D35186-CFBB-4A1B-BD0C-6963D4261F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D35186-CFBB-4A1B-BD0C-6963D4261F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D35186-CFBB-4A1B-BD0C-6963D4261F4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{402FE059-CECB-4882-9637-B0D7101D7C28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{402FE059-CECB-4882-9637-B0D7101D7C28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{402FE059-CECB-4882-9637-B0D7101D7C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{402FE059-CECB-4882-9637-B0D7101D7C28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +66,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4392BFAC-77EC-404D-A00C-38E9700F3AC1} = {FD8D6609-47F2-49D0-9201-BB7F8111FD84}
 		{06524968-8894-42C9-80F7-E1F98144B305} = {FD8D6609-47F2-49D0-9201-BB7F8111FD84}
+		{57D35186-CFBB-4A1B-BD0C-6963D4261F4C} = {FD8D6609-47F2-49D0-9201-BB7F8111FD84}
 	EndGlobalSection
 EndGlobal

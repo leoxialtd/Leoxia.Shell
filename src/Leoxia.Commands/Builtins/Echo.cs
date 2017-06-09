@@ -9,19 +9,18 @@ namespace Leoxia.Commands
     public class Echo : IBuiltin
     {
         private readonly IConsole _console;
-        private readonly IEnvironmentVariablesExpander _expander;
 
-        public Echo(IConsole console, IEnvironmentVariablesExpander expander)
+        public Echo(IConsole console)
         {
             _console = console;
-            _expander = expander;
         }
 
         public void Execute(List<string> tokens)
         {
-            var expandedTokens = tokens.Select(_expander.Expand);
-            var unquotedTokens = expandedTokens.Select(CommandLine.RemoveMatchingQuotes);
+            var unquotedTokens = tokens.Select(CommandLine.RemoveMatchingQuotes);
             _console.WriteLine(String.Join(" ", unquotedTokens));
         }
+
+        public string Command => "echo";
     }
 }

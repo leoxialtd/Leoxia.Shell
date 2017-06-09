@@ -19,22 +19,17 @@ namespace Leoxia.Commands
 
         public CommandExecutor(
             IConsole console, 
-            IDirectory directory, 
-            IFileSystemInfoFactory fileSystemFactory,
             IExecutableResolver resolver,
             IProgramRunnerFactory runnerFactory,
-            IEnvironmentVariablesExpander expander,
-            ILinkManager linkManager)
+            IBuiltin[] builtins)
         {
             _console = console;
             _resolver = resolver;
             _runnerFactory = runnerFactory;
-            _builtins.Add("echo", new Echo(console, expander));
-            _builtins.Add("cd", new Cd(console, directory));
-            _builtins.Add("mkdir", new Mkdir(console, directory));
-            _builtins.Add("ls", new Ls(console, directory, fileSystemFactory, linkManager));
-            //            _builtins.Add("rm", new Rm());
-            //            _builtins.Add("del", new Del());
+            foreach (var builtin in builtins)
+            {
+                _builtins.Add(builtin.Command, builtin);
+            }
         }
 
 
