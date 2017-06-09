@@ -1,6 +1,7 @@
 # Leoxia.Shell
-Bash/Cmd clone for Windows. Written in .NET Core.
-Not tested on Linux but should work as well.
+Cross platform command interpreter. Written in C#/.NET Core.
+Primarily intended to work on Windows.
+Not tested on Linux/Mac but should work as well.
 
 <img src="images/lxsh.png" />
 
@@ -22,7 +23,7 @@ Not tested on Linux but should work as well.
 
 - Standard output/error is captured from child process and displayed in console.
 
-## Environement Variables Expansion
+## Environment Variables Expansion
 
 Expand `${VARIABLE}` `$VARIABLE` `%VARIABLE%`
 
