@@ -37,12 +37,23 @@ The following builtins are already implemented
 - ls (options -l, -a, --color)
 - exit
 
+## Alias management
+
+- aliases are saved and loaded in `<directory_of_assembly>/.lxaliases`
+- aliases are expanded on the commandline
+
 ## TODO
 
 - History save between runs
 - History search 
 - Completion
-- Alias management
 - Standard Input redirection
 - Redirection operators < | > 
 - Prompt customization
+
+## Development
+
+In order to compile the projects, you'll need the following
+
+- [Visual Studio 2017 Preview 2](https://www.visualstudio.com/vs/preview/)
+- [.NET Core Preview 2](https://www.microsoft.com/net/core/preview#windowscmd)
