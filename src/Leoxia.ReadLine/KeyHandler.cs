@@ -28,19 +28,26 @@ namespace Leoxia.ReadLine
         private readonly IConsoleWriter _writer;
         private readonly IPromptProvider _promptProvider;
         private readonly IHistoryNavigator _historyNavigator;
+        private readonly ICompletionNavigator _completionNavigator;
 
         private readonly IDictionary<ControlSequence, Action> _handlers =
             new Dictionary<ControlSequence, Action>();
 
+        private readonly ICompletionWriter _completionWriter;
+
         public KeyHandler(IConsole console,
             IConsoleWriter writer,
             IPromptProvider promptProvider,
-            IHistoryNavigator historyNavigator)
+            IHistoryNavigator historyNavigator,
+            ICompletionNavigator completionNavigator,
+            ICompletionWriter completionWriter)
         {
             _console = console;
             _writer = writer;
             _promptProvider = promptProvider;
             _historyNavigator = historyNavigator;
+            _completionNavigator = completionNavigator;
+            _completionWriter = completionWriter;
             AddHandler(_writer.MoveCursorLeft, Seqs.ControlB, Seqs.LeftArrow);
             AddHandler(_writer.MoveCursorRight, Seqs.ControlF, Seqs.RightArrow);
 
@@ -57,7 +64,8 @@ namespace Leoxia.ReadLine
 
             AddHandler(BreakProcess, Seqs.ControlC);
 
-            AddHandler(AutoComplete, Seqs.Tab);
+            AddHandler(NextAutoComplete, Seqs.Tab);
+            AddHandler(PrevAutoComplete, Seqs.ShiftTab);
 
             // Cmder specific features
             //AddHandler(TraverseUpDirectory, Seqs.ControlAltU);
@@ -73,9 +81,18 @@ namespace Leoxia.ReadLine
             //_handlers.Add(BuildKey(ConsoleKey.Underscore, Console.Control), Undo);
         }
 
-        private void AutoComplete()
+        private void PrevAutoComplete()
         {
-            
+            var results = _completionNavigator.PreviousAutoComplete(_historyNavigator.Current);
+            _writer.Write(_historyNavigator.Current);
+            _completionWriter.Write(results);
+        }
+
+        private void NextAutoComplete()
+        {
+            var results = _completionNavigator.NextAutoComplete(_historyNavigator.Current);
+            _writer.Write(_historyNavigator.Current);
+            _completionWriter.Write(results);
         }
 
         private void BreakProcess()
@@ -103,6 +120,10 @@ namespace Leoxia.ReadLine
 
         public void Handle(ConsoleKeyInfo keyInfo)
         {
+            if (keyInfo.Key != ConsoleKey.Tab)
+            {
+                _completionNavigator.ExitCompletion();
+            }
             var key = new ControlSequence(keyInfo);
             Action handler;
             if (_handlers.TryGetValue(key, out handler))

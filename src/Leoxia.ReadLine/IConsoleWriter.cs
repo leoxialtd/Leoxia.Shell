@@ -12,5 +12,6 @@ namespace Leoxia.ReadLine
         void MoveCursorHome();
         void MoveCursorEnd();
         void Write(CommandLineBuffer current, char keyChar);
+        void WriteBelow(string text);
     }
 }

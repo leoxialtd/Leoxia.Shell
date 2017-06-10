@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Leoxia.Abstractions.IO;
 
@@ -18,6 +19,7 @@ namespace Leoxia.ReadLine
         public ConsoleWriter(IConsole console)
         {
             _console = console;
+            Reset();
         }
 
         private bool IsStartOfLine()
@@ -67,9 +69,26 @@ namespace Leoxia.ReadLine
                 WriteInPlace(c + str);
                 MoveCursorRight();
             }
-            _maxLeft = _console.CursorLeft;
-            _maxTop = _console.CursorTop;
+            IncrementCursorLimit();
+        }
+
+        private void IncrementCursorLimit()
+        {
+            if (_maxLeft == _console.BufferWidth - 1)
+            {
+                _maxLeft = 0;
+                _maxTop++;
+            }
+            else
+            {
+                _maxLeft++;
+            }
             _cursorLimit++;
+        }
+
+        public void WriteBelow(string text)
+        {
+            
         }
 
         private void WriteInPlace(string value)
@@ -94,16 +113,28 @@ namespace Leoxia.ReadLine
                     value = str + value;
                 }
                 WriteInPlace(value);
-                _cursorLimit--;
+                DecrementCursorLimit();
             }
+        }
+
+        private void DecrementCursorLimit()
+        {
+            if (_maxLeft == 0)
+            {
+                _maxTop--;
+                _maxLeft = _console.BufferWidth - 1;
+            }
+            else
+            {
+                _maxLeft--;
+            }
+            _cursorLimit--;
         }
 
         public void Reset()
         {
-            _initialLeft = _console.CursorLeft;
-            _initialTop = _console.CursorTop;
-            _maxLeft = _console.CursorLeft;
-            _maxTop = _console.CursorTop;
+            _maxLeft = _initialLeft = _console.CursorLeft;
+            _maxTop = _initialTop = _console.CursorTop;
             _cursorPos = 0;
             _cursorLimit = 0;
         }

@@ -24,12 +24,10 @@ namespace Leoxia.ReadLine
         public static readonly ControlSequence DownArrow = new ControlSequence(ConsoleKey.DownArrow);
         public static readonly ControlSequence ControlC = new ControlSequence(Control, C);
         public static readonly ControlSequence Tab = new ControlSequence(ConsoleKey.Tab);
+        public static readonly ControlSequence ShiftTab = new ControlSequence(Shift, ConsoleKey.Tab);
 
         private ControlSequences()
         {            
         }
-
-
-        
     }
 }
