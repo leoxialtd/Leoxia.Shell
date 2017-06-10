@@ -21,6 +21,17 @@ namespace Leoxia.CommandTransform.Test
         }
 
         [Fact]
+        public void Cumulative_Expand_Test()
+        {
+            var providerMock = new Mock<IAliasProvider>();
+            providerMock.Setup(x => x.GetAliases()).Returns(new List<Alias> { new Alias { Key = "ls", Value = "ls --color" }, new Alias { Key = "ll", Value = "ls -l" } });
+            var provider = providerMock.Object;
+            var expander = new AliasExpanderPipe(provider);
+            var expanded = expander.Transform("ll");
+            Assert.Equal("ls --color -l", expanded);
+        }
+
+        [Fact]
         public void Expand_With_SimilarName_Test()
         {
             var providerMock = new Mock<IAliasProvider>();

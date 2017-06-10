@@ -19,19 +19,39 @@ namespace Leoxia.CommandTransform.Aliases
 
         public string Transform(string commandLine)
         {
+            var expansionMarks = new HashSet<string>();
+            bool hasBeenExpanded;
+            string result = commandLine;
+            do
+            {
+                result = Expand(result, expansionMarks, out hasBeenExpanded);
+            } while (hasBeenExpanded);
+            return result;
+        }
+
+        private string Expand(string commandLine, HashSet<string> expansionMarks, out bool hasBeenExpanded)
+        {
+            hasBeenExpanded = false;
             var tokens = CommandLine.Split(commandLine);
             var expanded = new List<string>();
+            var marks = new List<string>();
             foreach (var token in tokens)
             {
                 string value;
-                if (_aliases.TryGetValue(token, out value))
+                if (!expansionMarks.Contains(token) && _aliases.TryGetValue(token, out value))
                 {
+                    marks.Add(token);
                     expanded.Add(value);
+                    hasBeenExpanded = true;
                 }
                 else
                 {
                     expanded.Add(token);
                 }
+            }
+            foreach (var mark in marks)
+            {
+                expansionMarks.Add(mark);
             }
             return string.Join(" ", expanded);
         }

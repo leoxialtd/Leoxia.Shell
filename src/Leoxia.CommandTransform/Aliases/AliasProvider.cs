@@ -25,15 +25,23 @@ namespace Leoxia.CommandTransform.Aliases
         private List<Alias> InnerLoad(IDirectory directorySystem, IFile fileSystem)
         {
             string aliasFilePath = GetAliasFilePath(directorySystem);
-            if (fileSystem.Exists(aliasFilePath))
+            try
             {
-                string json;
-                using (var reader = fileSystem.OpenText(aliasFilePath))
+
+                if (fileSystem.Exists(aliasFilePath))
                 {
-                    json = reader.ReadToEnd();
+                    string json;
+                    using (var reader = fileSystem.OpenText(aliasFilePath))
+                    {
+                        json = reader.ReadToEnd();
+                    }
+                    var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                    return values.Select(x => new Alias {Key = x.Key, Value = x.Value}).ToList();
                 }
-                var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-                return values.Select(x => new Alias { Key = x.Key, Value = x.Value }).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"While reading aliases in {aliasFilePath} : {e.Message}");
             }
             return new List<Alias>();
         }
