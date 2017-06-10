@@ -60,4 +60,4 @@ In order to compile the projects, you'll need the following
 
 ## Contribution
 
-Any contribution is welcome. Please Read [Contibuting](CONTRIBUTING.md)
+Any contribution is welcome. Please Read [Contributing](CONTRIBUTING.md)
