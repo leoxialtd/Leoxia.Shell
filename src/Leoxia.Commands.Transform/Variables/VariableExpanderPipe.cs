@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Leoxia.Commands;
 
-namespace Leoxia.CommandTransform.Variables
+namespace Leoxia.Commands.Transform.Variables
 {
     public class VariableExpanderPipe : ICommandTransformPipe
     {

@@ -1,4 +1,4 @@
-﻿namespace Leoxia.CommandTransform
+﻿namespace Leoxia.Commands.Transform
 {
     public interface ICommandTransformPipe
     {

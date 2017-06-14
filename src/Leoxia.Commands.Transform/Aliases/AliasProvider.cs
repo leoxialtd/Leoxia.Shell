@@ -7,7 +7,7 @@ using System.Text;
 using Leoxia.Abstractions.IO;
 using Newtonsoft.Json;
 
-namespace Leoxia.CommandTransform.Aliases
+namespace Leoxia.Commands.Transform.Aliases
 {
     public class AliasProvider : IAliasProvider, IAliasRepository
     {

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 using Leoxia.Abstractions.IO;
 using Xunit;
-using Leoxia.CommandTransform.Aliases;
+using Leoxia.Commands.Transform.Aliases;
 using Moq;
 using System.Linq;
 
-namespace Leoxia.CommandTransform.Test
+namespace Leoxia.Commands.Transform.Test
 {   
     public class AliasProviderTest
     {

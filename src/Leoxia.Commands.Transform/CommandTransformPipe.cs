@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.NetworkInformation;
 
-namespace Leoxia.CommandTransform
+namespace Leoxia.Commands.Transform
 {
     public class CommandTransformPipeline : ITransformPipeline
     {

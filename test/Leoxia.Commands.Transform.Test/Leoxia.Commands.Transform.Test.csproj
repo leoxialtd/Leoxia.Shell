@@ -11,7 +11,7 @@
     <PackageReference Include="Moq" Version="4.7.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Leoxia.CommandTransform\Leoxia.CommandTransform.csproj" />
+    <ProjectReference Include="..\..\src\Leoxia.Commands.Transform\Leoxia.Commands.Transform.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />

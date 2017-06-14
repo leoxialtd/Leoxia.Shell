@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Moq;
-using Leoxia.CommandTransform.Aliases;
+using Leoxia.Commands.Transform.Aliases;
 using Xunit;
 
-namespace Leoxia.CommandTransform.Test
+namespace Leoxia.Commands.Transform.Test
 {
     public class AliasExpanderTest
     {

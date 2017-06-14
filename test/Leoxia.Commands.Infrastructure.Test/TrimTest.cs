@@ -4,7 +4,7 @@ using System.Text;
 using Leoxia.Commands.Infrastructure;
 using Xunit;
 
-namespace Leoxia.Commands.Test
+namespace Leoxia.Text.Extensions.Test
 {
     public class TrimTest
     {

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Leoxia.Collections;
+﻿using Leoxia.Collections;
 using Leoxia.Commands.Infrastructure;
 using Xunit;
 
-namespace Leoxia.Commands.Test
+namespace Leoxia.Text.Extensions.Test
 {
-    public class TokenizerTest
+    public class CommandLineTest
     {
 
         [Fact]
@@ -17,6 +14,20 @@ namespace Leoxia.Commands.Test
             using (var cursor = tokens.GetCursor())
             {
                 Assert.Equal("my.exe", cursor.Next());
+                Assert.Equal("wants", cursor.Next());
+                Assert.Equal("to", cursor.Next());
+                Assert.Equal("run", cursor.Next());
+                Assert.Equal(null, cursor.Next());
+            }
+        }
+
+        [Fact]
+        public void BackSlashSpaceCaseTest()
+        {
+            var tokens = CommandLine.Split("C:\\Program\\ Files\\my.exe wants to run");
+            using (var cursor = tokens.GetCursor())
+            {
+                Assert.Equal("C:\\Program\\ Files\\my.exe", cursor.Next());
                 Assert.Equal("wants", cursor.Next());
                 Assert.Equal("to", cursor.Next());
                 Assert.Equal("run", cursor.Next());

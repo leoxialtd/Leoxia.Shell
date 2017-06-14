@@ -4,9 +4,9 @@ using Leoxia.Abstractions.IO;
 using Leoxia.Commands;
 using Leoxia.Commands.External;
 using Leoxia.Commands.Threading;
-using Leoxia.CommandTransform;
-using Leoxia.CommandTransform.Variables;
-using Leoxia.CommandTransform.Aliases;
+using Leoxia.Commands.Transform;
+using Leoxia.Commands.Transform.Variables;
+using Leoxia.Commands.Transform.Aliases;
 using Leoxia.Implementations;
 using Leoxia.Implementations.IO;
 using Leoxia.ReadLine;
@@ -19,6 +19,7 @@ namespace Leoxia.Shell
         public void Configure(Container container)
         {
             container.Register<IConsole, ConsoleAdapter>(Reuse.Singleton);
+            container.Register<IEnvironment, EnvironmentAdapter>();
             container.Register<IFile, FileAdapter>(Reuse.Singleton);
             container.RegisterInstance<ISafeConsole>(SafeConsoleAdapter.Instance, Reuse.Singleton);
             container.Register<IBuiltin, Ls>(Reuse.Singleton);

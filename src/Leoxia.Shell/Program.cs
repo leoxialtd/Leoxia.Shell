@@ -5,7 +5,7 @@ using System.Reflection;
 using DryIoc;
 using Leoxia.Abstractions.IO;
 using Leoxia.Commands;
-using Leoxia.CommandTransform;
+using Leoxia.Commands.Transform;
 using Leoxia.ReadLine;
 
 namespace Leoxia.Shell

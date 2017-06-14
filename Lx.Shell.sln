@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26510.0
+VisualStudioVersion = 15.0.26606.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Shell", "src\Leoxia.Shell\Leoxia.Shell.csproj", "{5E9EBED4-5165-43FD-A777-1F3AEA852FE6}"
 EndProject
@@ -15,11 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Commands.Test", "tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Commands", "src\Leoxia.Commands\Leoxia.Commands.csproj", "{14A6DF4C-0835-4352-BB35-63E225D7A6A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.CommandTransform", "src\Leoxia.CommandTransform\Leoxia.CommandTransform.csproj", "{B3ECCC58-9801-40D2-95E5-3E600AF105CB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.CommandTransform.Test", "test\Leoxia.CommandTransform.Test\Leoxia.CommandTransform.Test.csproj", "{57D35186-CFBB-4A1B-BD0C-6963D4261F4C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Commands.Infrastructure", "src\Leoxia.Commands.Infrastructure\Leoxia.Commands.Infrastructure.csproj", "{402FE059-CECB-4882-9637-B0D7101D7C28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Commands.Infrastructure.Test", "test\Leoxia.Commands.Infrastructure.Test\Leoxia.Commands.Infrastructure.Test.csproj", "{288E0A73-CA4E-4F34-80C4-BC20C5C122F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Commands.Transform.Test", "test\Leoxia.Commands.Transform.Test\Leoxia.Commands.Transform.Test.csproj", "{C81FBA27-B7A2-4FEB-B4D5-8D377F5F03A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leoxia.Commands.Transform", "src\Leoxia.Commands.Transform\Leoxia.Commands.Transform.csproj", "{11F9465D-B5A0-45F6-825D-B5C8D96DC00B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,18 +49,22 @@ Global
 		{14A6DF4C-0835-4352-BB35-63E225D7A6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14A6DF4C-0835-4352-BB35-63E225D7A6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14A6DF4C-0835-4352-BB35-63E225D7A6A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3ECCC58-9801-40D2-95E5-3E600AF105CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3ECCC58-9801-40D2-95E5-3E600AF105CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3ECCC58-9801-40D2-95E5-3E600AF105CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3ECCC58-9801-40D2-95E5-3E600AF105CB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57D35186-CFBB-4A1B-BD0C-6963D4261F4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57D35186-CFBB-4A1B-BD0C-6963D4261F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57D35186-CFBB-4A1B-BD0C-6963D4261F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57D35186-CFBB-4A1B-BD0C-6963D4261F4C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{402FE059-CECB-4882-9637-B0D7101D7C28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{402FE059-CECB-4882-9637-B0D7101D7C28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{402FE059-CECB-4882-9637-B0D7101D7C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{402FE059-CECB-4882-9637-B0D7101D7C28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{288E0A73-CA4E-4F34-80C4-BC20C5C122F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{288E0A73-CA4E-4F34-80C4-BC20C5C122F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{288E0A73-CA4E-4F34-80C4-BC20C5C122F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{288E0A73-CA4E-4F34-80C4-BC20C5C122F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C81FBA27-B7A2-4FEB-B4D5-8D377F5F03A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C81FBA27-B7A2-4FEB-B4D5-8D377F5F03A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C81FBA27-B7A2-4FEB-B4D5-8D377F5F03A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C81FBA27-B7A2-4FEB-B4D5-8D377F5F03A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11F9465D-B5A0-45F6-825D-B5C8D96DC00B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11F9465D-B5A0-45F6-825D-B5C8D96DC00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11F9465D-B5A0-45F6-825D-B5C8D96DC00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11F9465D-B5A0-45F6-825D-B5C8D96DC00B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4392BFAC-77EC-404D-A00C-38E9700F3AC1} = {FD8D6609-47F2-49D0-9201-BB7F8111FD84}
 		{06524968-8894-42C9-80F7-E1F98144B305} = {FD8D6609-47F2-49D0-9201-BB7F8111FD84}
-		{57D35186-CFBB-4A1B-BD0C-6963D4261F4C} = {FD8D6609-47F2-49D0-9201-BB7F8111FD84}
+		{288E0A73-CA4E-4F34-80C4-BC20C5C122F8} = {FD8D6609-47F2-49D0-9201-BB7F8111FD84}
+		{C81FBA27-B7A2-4FEB-B4D5-8D377F5F03A4} = {FD8D6609-47F2-49D0-9201-BB7F8111FD84}
 	EndGlobalSection
 EndGlobal

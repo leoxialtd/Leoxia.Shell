@@ -2,7 +2,7 @@
 using System.Linq;
 using Leoxia.Commands.Infrastructure;
 
-namespace Leoxia.CommandTransform.Aliases
+namespace Leoxia.Commands.Transform.Aliases
 {
     public class AliasExpanderPipe : ICommandTransformPipe
     {

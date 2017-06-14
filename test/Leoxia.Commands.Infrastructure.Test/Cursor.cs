@@ -1,9 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Leoxia.Collections
 {
+    public static class CursorEx
+    {
+
+        public static ICursor<T> GetCursor<T>(this IEnumerable<T> enumerable)
+            where T : class
+        {
+            return new Cursor<T>(enumerable);
+        }
+    }
+
+    public interface ICursor<T> : IDisposable
+    {
+        T Next();
+    }
+
     public sealed class Cursor<T> : ICursor<T> where T : class
     {
         private readonly IEnumerator<T> _enumerator;
@@ -26,20 +40,5 @@ namespace Leoxia.Collections
         {
             _enumerator.Dispose();
         }
-    }
-
-    public static class CursorEx
-    {
-
-        public static ICursor<T> GetCursor<T>(this IEnumerable<T> enumerable)
-            where T : class
-        {
-            return new Cursor<T>(enumerable);
-        }
-    }
-
-    public interface ICursor<T> : IDisposable
-    {
-        T Next();
     }
 }

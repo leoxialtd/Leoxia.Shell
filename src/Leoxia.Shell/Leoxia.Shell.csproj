@@ -5,15 +5,16 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Leoxia.Abstractions.IO" Version="1.1.90" />
+    <PackageReference Include="Leoxia.Abstractions.IO" Version="1.1.93" />
     <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="1.1.1" />
-    <PackageReference Include="Leoxia.Implementations.IO" Version="1.1.90" />
-    <PackageReference Include="Leoxia.Implementations.Time" Version="1.1.90" />
+    <PackageReference Include="Leoxia.Implementations" Version="1.1.93" />
+    <PackageReference Include="Leoxia.Implementations.IO" Version="1.1.93" />
+    <PackageReference Include="Leoxia.Implementations.Time" Version="1.1.93" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Leoxia.Commands\Leoxia.Commands.csproj" />
-    <ProjectReference Include="..\Leoxia.CommandTransform\Leoxia.CommandTransform.csproj" />
+    <ProjectReference Include="..\Leoxia.Commands.Transform\Leoxia.Commands.Transform.csproj" />
     <ProjectReference Include="..\Leoxia.ReadLine\Leoxia.ReadLine.csproj" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Leoxia.Abstractions" Version="1.1.91" />
     <PackageReference Include="Leoxia.Abstractions.IO" Version="1.1.90" />
     <PackageReference Include="Leoxia.Implementations.IO" Version="1.1.90" />
     <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
