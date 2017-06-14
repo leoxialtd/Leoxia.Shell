@@ -12,7 +12,8 @@ namespace Leoxia.Commands.External
 {
     public interface IProgramRunnerFactory
     {
-        IProgramRunner CreateRunner(string command);
+
+        IProgramRunner CreateRunner(string command, bool isInterative);
     }
 
     public class ProgramRunnerFactory : IProgramRunnerFactory
@@ -31,8 +32,12 @@ namespace Leoxia.Commands.External
         }
 
 
-        public IProgramRunner CreateRunner(string command)
+        public IProgramRunner CreateRunner(string command, bool isInterative)
         {
+            if (isInterative)
+            {
+                return new InteractiveProgramRunner(_resolver, _safeConsole, _directory, command);
+            }
             return new ProgramRunner(_resolver, _safeConsole, _directory, command);
         }
     }

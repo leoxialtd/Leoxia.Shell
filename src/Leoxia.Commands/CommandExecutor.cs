@@ -62,14 +62,11 @@ namespace Leoxia.Commands
                     }
                     else
                     {
-                        var runner = _runnerFactory.CreateRunner(command);
+                        var runner = _runnerFactory.CreateRunner(command, true);
                         var task = runner.AsyncRun();
                         while (!task.IsCompleted)
                         {
                             Task.Delay(100).Wait();
-                            // TODO: Fix the StandardInput redirection
-                            //var key = _console.ReadKey(true);
-                            //runner.WriteInInput(key);
                         }
                     }
                 }

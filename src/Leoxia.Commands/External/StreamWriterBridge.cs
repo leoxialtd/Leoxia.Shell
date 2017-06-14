@@ -37,9 +37,14 @@ namespace Leoxia.Commands.External
             //}
             //else
             //{
-                //_input.WriteAsync("" + key.KeyChar);
-                var bytes = Encoding.Unicode.GetBytes(new char[] {key.KeyChar, '\r', '\n'});
-                _baseStream.Write(bytes, 0, bytes.Length);
+                //_input.Write(key.KeyChar);
+                var bytes = Encoding.UTF8.GetBytes(new char[] {key.KeyChar,
+                        //'\r', 
+                        //'\n'
+                });
+                var res = _baseStream.BeginWrite(bytes, 0, bytes.Length, null, null);
+                _baseStream.EndWrite(res);
+                _baseStream.Flush(true);
             //}
         }
     }

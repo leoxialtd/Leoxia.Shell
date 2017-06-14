@@ -22,7 +22,7 @@ namespace Leoxia.Commands
         {
             if (!string.IsNullOrEmpty(_resolver.Resolve("readlink")))
             {
-                var runner = _runnerFactory.CreateRunner("readlink " + path);
+                var runner = _runnerFactory.CreateRunner("readlink " + path, false);
                 return runner.AsyncRun().Result;
             }
             return null;

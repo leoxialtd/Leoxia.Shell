@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Leoxia.Commands.Infrastructure;
 
 namespace Leoxia.CommandTransform.Aliases
 {
     public class AliasExpanderPipe : ICommandTransformPipe
     {
-        private readonly IAliasProvider _provider;
-        private Dictionary<string, string> _aliases;
+        private readonly Dictionary<string, string> _aliases;
 
         public AliasExpanderPipe(IAliasProvider provider)
         {
-            _provider = provider;
             _aliases = provider.GetAliases().ToDictionary(x => x.Key, y => y.Value);
         }
 
