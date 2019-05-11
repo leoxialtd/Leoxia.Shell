@@ -100,6 +100,9 @@ namespace Leoxia.Commands
                 var others = new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null).Translate(typeof(NTAccount));
                 var othersRights = new Rights();
                 var authorizationRules = security.GetAccessRules(true, true, typeof(NTAccount));
+                //security.ModifyAccessRule(AccessControlModification.Add,
+                //    new FileSystemAccessRule(owner, FileSystemRights.Modify, AccessControlType.Allow),
+                //    out bool modified);
                 foreach (AuthorizationRule rule in authorizationRules)
                 {
                     FileSystemAccessRule fileRule = rule as FileSystemAccessRule;

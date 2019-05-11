@@ -17,4 +17,9 @@
     <ProjectReference Include="..\Leoxia.Commands.Transform\Leoxia.Commands.Transform.csproj" />
     <ProjectReference Include="..\Leoxia.ReadLine\Leoxia.ReadLine.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update=".lxaliases">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

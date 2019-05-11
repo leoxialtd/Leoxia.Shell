@@ -66,7 +66,7 @@ namespace Leoxia.Commands
                         var task = runner.AsyncRun();
                         while (!task.IsCompleted)
                         {
-                            Task.Delay(100).Wait();
+                            Task.Delay(50).Wait();
                         }
                     }
                 }

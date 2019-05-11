@@ -1,0 +1,6 @@
+﻿{
+	"ls" : "ls --color",
+	"ll" : "ls -l",
+	"la" : "ls -l",
+	"lla" : "ls -la"
+}
